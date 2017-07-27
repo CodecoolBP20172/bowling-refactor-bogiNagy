@@ -10,7 +10,7 @@ def score(game):
         if frame < 10 and get_value(game[i]) == 10:
             if game[i] == '/':
                 result += get_value(game[i+1])
-            elif game[i] == 'X' or game[i] == 'x':
+            elif game[i] in 'Xx':
                 result += get_value(game[i+1])
                 if game[i+2] == '/':
                     result += 10 - get_value(game[i+1])
@@ -23,20 +23,16 @@ def score(game):
             in_first_half = False
         else:
             in_first_half = True
-        if game[i] == 'X' or game[i] == 'x':
+        if game[i] in 'Xx':
             in_first_half = True
             frame += 1
     return result
 
 
 def get_value(char):
-    if char == 'X' or char == 'x':
-        return 10
-    elif char == '/':
+    if char in 'Xx/':
         return 10
     elif char == '-':
         return 0
     elif int(char) < 10 and int(char) > 0:
         return int(char)
-    else:
-        raise ValueError()
